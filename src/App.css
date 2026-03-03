@@ -207,10 +207,75 @@ body, html, #root {
 }
 
 /* GRID */
+/* Default (desktop/tablet) */
+/* Desktop: 2x2 grid */
 .color-grid {
   display: grid;
-  grid-template-columns: repeat(2, 200px);
-  gap: 30px;
+  grid-template-columns: repeat(2, 180px); /* 2 columns fixed */
+  gap: 25px;
+  justify-content: center; /* center align horizontally */
+}
+
+/* Card size */
+.color-card {
+  width: 180px;
+  height: 120px;
+  font-size: 18px;
+  border-radius: 15px;
+}
+
+/* Mobile: stack ek ke upar ek */
+@media (max-width: 600px) {
+  .color-grid {
+    grid-template-columns: 1fr; /* single column */
+    gap: 20px; /* spacing between cards */
+    width: 90%; /* thoda chhota aur center aligned */
+  }
+
+  .color-card {
+    width: 100%;
+    height: 100px;
+    font-size: 16px;
+  }
+}
+
+
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  .color-title {
+    font-size: 36px;
+  }
+
+  @media (max-width: 600px) {
+  .color-subtitle {
+    text-align: center;   /* still center aligned */
+    width: 100%;
+    margin-left: 30px;    /* thoda right shift */
+  }
+}
+
+
+  .color-card {
+    height: 120px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .color-title {
+    font-size: 28px;
+  }
+
+  .color-subtitle {
+    font-size: 14px;
+  }
+
+  .color-card {
+    height: 100px;
+    font-size: 16px;
+    padding: 10px;
+  }
 }
 
 /* CARD STYLE */
@@ -241,6 +306,9 @@ body, html, #root {
 .blue:hover { background: #4da6ff; }
 .green:hover { background: #33cc33; }
 /* DIFFERENT BACKGROUND */
+
+
+/* Gift Page Base */
 .gift-page {
   height: 100vh;
   width: 100%;
@@ -254,14 +322,14 @@ body, html, #root {
   overflow: hidden;
 }
 
-/* TITLE */
+/* Title */
 .gift-title {
   font-size: 40px;
   margin-bottom: 40px;
   text-shadow: 0 0 20px #ffd633;
 }
 
-/* GIFT BOX */
+/* Gift Box */
 .gift-box {
   font-size: 120px;
   cursor: pointer;
@@ -269,28 +337,34 @@ body, html, #root {
   animation: float 2s ease-in-out infinite;
 }
 
-/* Floating effect */
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-15px); }
-  100% { transform: translateY(0px); }
-}
-
-/* When clicked (grab + burst effect) */
-.gift-box.open {
-  animation: burst 1s forwards;
-}
-
-@keyframes burst {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.5) rotate(20deg); }
-  100% { transform: scale(0); opacity: 0; }
-}
-
 /* Hover glow */
 .gift-box:hover {
   transform: scale(1.2);
 }
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .gift-title {
+    font-size: 28px;   /* smaller title */
+    margin-bottom: 25px;
+  }
+
+  .gift-box {
+    font-size: 90px;   /* smaller gift box */
+  }
+}
+
+@media (max-width: 480px) {
+  .gift-title {
+    font-size: 22px;   /* compact title */
+    margin-bottom: 20px;
+  }
+
+  .gift-box {
+    font-size: 70px;   /* compact gift box */
+  }
+}
+
 /* FULL PAGE */
 .fortune-page-light {
   height: 100vh;
@@ -595,64 +669,188 @@ body, html, #root {
   to { opacity: 1; }
 }
 /* Fortune Page */
+/* Fortune Page Base */
 .holi-career-page {
   height: 100vh;
+  width: 100%;
   background: linear-gradient(135deg, #ff4e50, #fc913a, #f9d423);
+  background-size: 300% 300%;
+  animation: bgMove 8s ease infinite;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   color: white;
   text-align: center;
+  overflow: hidden;
 }
 
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Title */
+.career-title {
+  font-size: 45px;
+  margin-bottom: 50px;
+  text-shadow: 0 5px 25px rgba(0,0,0,0.3);
+}
+
+/* Career Options */
 .career-options {
   display: flex;
   gap: 30px;
-  margin-top: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .career-option {
   padding: 20px 40px;
   border-radius: 40px;
   background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  transition: 0.4s;
+  border: 1px solid rgba(255,255,255,0.4);
+}
+
+.career-option:hover {
+  transform: scale(1.1);
+  background: rgba(255,255,255,0.35);
+}
+
+/* Result Section */
+.result-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Badge */
+.badge {
+  font-size: 40px;
+  font-weight: bold;
+  padding: 25px 60px;
+  border-radius: 60px;
+  background: white;
+  color: #ff4e50;
+  margin-bottom: 30px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+/* Power Lines */
+.power-line {
+  font-size: 22px;
+  margin: 8px 0;
+}
+
+/* Buttons */
+.button-area {
+  margin-top: 40px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.again-btn,
+.journey-btn {
+  padding: 12px 35px;
+  font-size: 16px;
+  border-radius: 30px;
+  border: none;
   cursor: pointer;
   font-weight: bold;
   transition: 0.3s;
 }
 
-.career-option:hover {
+.again-btn {
+  background: white;
+  color: #ff4e50;
+}
+
+.journey-btn {
+  background: #222;
+  color: white;
+}
+
+.again-btn:hover,
+.journey-btn:hover {
   transform: scale(1.1);
 }
 
-.badge {
-  font-size: 35px;
-  font-weight: bold;
-  background: white;
-  color: #ff4e50;
-  padding: 20px 50px;
-  border-radius: 50px;
-  margin-bottom: 20px;
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .career-title {
+    font-size: 32px;
+    margin-bottom: 30px;
+  }
+
+  .career-option {
+    font-size: 18px;
+    padding: 15px 30px;
+  }
+
+  .badge {
+    font-size: 28px;
+    padding: 20px 40px;
+  }
+
+  .power-line {
+    font-size: 18px;
+  }
 }
 
-.power-line {
-  font-size: 20px;
-  margin: 5px;
+@media (max-width: 480px) {
+  .career-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .career-options {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .career-option {
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+
+  .badge {
+    font-size: 22px;
+    padding: 15px 30px;
+  }
+
+  .power-line {
+    font-size: 16px;
+  }
+
+  .button-area {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .again-btn,
+  .journey-btn {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 20px;
+  }
 }
 
-.button-area {
-  margin-top: 30px;
-  display: flex;
-  gap: 20px;
-}
-
-.again-btn, .journey-btn, .back-btn {
-  padding: 10px 25px;
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-}
 
 .again-btn {
   background: white;
@@ -664,37 +862,8 @@ body, html, #root {
   color: white;
 }
 
-.roadmap-page {
-  height: 100vh;
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 60px;
-  color: white;
-}
-
-.steps {
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.step-card {
-  background: white;
-  color: #ff758c;
-  padding: 12px 25px;
-  border-radius: 30px;
-  width: 300px;
-  text-align: center;
-}
-
-.back-btn {
-  margin-top: 30px;
-  background: black;
-  color: white;
-}
+/* Roadmap Page Base */
+/* Roadmap Page Base */
 .roadmap-page {
   min-height: 100vh;
   background: linear-gradient(135deg, #1e3c72, #2a5298);
@@ -710,7 +879,7 @@ body, html, #root {
 .roadmap-page h1 {
   color: #ffffff;
   font-size: 36px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 /* Progress Bar */
@@ -787,6 +956,61 @@ body, html, #root {
   color: #003333;
   transition: 0.3s;
 }
+
+.back-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .roadmap-page h1 {
+    font-size: 28px;
+  }
+
+  .progress-container {
+    width: 260px;
+  }
+
+  .step-card {
+    width: 260px;
+    font-size: 14px;
+  }
+
+  .complete-msg {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .roadmap-page {
+    padding: 20px;
+  }
+
+  .roadmap-page h1 {
+    font-size: 22px;
+  }
+
+  .progress-container {
+    width: 200px;
+  }
+
+  .step-card {
+    width: 100%;
+    font-size: 13px;
+    padding: 12px;
+  }
+
+  .complete-msg {
+    font-size: 16px;
+  }
+
+  .back-btn {
+    width: 100%;
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+}
+
 
 .back-btn:hover {
   transform: scale(1.1);
